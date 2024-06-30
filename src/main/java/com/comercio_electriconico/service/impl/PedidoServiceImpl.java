@@ -5,6 +5,7 @@ import com.comercio_electriconico.entity.Pedido;
 import com.comercio_electriconico.service.PedidoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.time.LocalDate;
@@ -31,5 +32,16 @@ public class PedidoServiceImpl implements PedidoService {
                         return pedidoDao.save(pedido).then();
                     }));
         }
+    }
+
+    @Override
+    public Flux<Pedido> listaPedidos() {
+        return pedidoDao.findAll();
+    }
+
+    @Override
+    public Mono<Pedido> eliminarPedido(String id) {
+        return pedidoDao.findById(id)
+                .flatMap(e -> pedidoDao.deleteById(id).then(Mono.just(e)));
     }
 }

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @RestController
@@ -21,4 +22,15 @@ public class PedidoController {
         return new ResponseEntity<>(pedidoService.registrarPedido(pedido), HttpStatus.OK);
     }
 
+    @GetMapping(path = "/findAll")
+    public ResponseEntity<Flux<Pedido>> findAll(){
+        return new ResponseEntity<>(pedidoService.listaPedidos(), HttpStatus.OK);
+    }
+
+    @DeleteMapping(path = "/delete/{id}")
+    public Mono<ResponseEntity<Pedido>> eliminar(@PathVariable("id") String id){
+        return pedidoService.eliminarPedido(id)
+                .map(e -> new ResponseEntity<>(e, HttpStatus.OK))
+                .switchIfEmpty(Mono.just(new ResponseEntity<>(HttpStatus.NOT_FOUND)));
+    }
 }
