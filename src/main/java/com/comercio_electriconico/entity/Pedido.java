@@ -3,6 +3,7 @@ package com.comercio_electriconico.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDate;
@@ -13,7 +14,8 @@ import java.util.List;
 @Data
 @Document(collection = "pedido")
 public class Pedido {
-    private Integer id;
+    @Id
+    private String id;
     private String estado;
     private Integer idCliente;
     private List<ProductoPedido> productos;

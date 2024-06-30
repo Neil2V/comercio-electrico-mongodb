@@ -4,7 +4,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.mongodb.repository.config.EnableReactiveMongoRepositories;
 
-@EnableReactiveMongoRepositories(basePackages = "dao")
+@EnableReactiveMongoRepositories(basePackages = "com.comercio_electriconico.dao")
 @SpringBootApplication
 public class ComercioElectricoMongodbApplication {
 
