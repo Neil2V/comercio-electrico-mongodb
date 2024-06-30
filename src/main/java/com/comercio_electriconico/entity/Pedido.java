@@ -23,4 +23,12 @@ public class Pedido {
     private List<ProductoPedido> productos;
     private Integer total;
     private LocalDate fchRegistro;
+
+    public void calcularTotal() {
+        int totalCosto = 0;
+        for (ProductoPedido producto : productos) {
+            totalCosto += producto.getCantidad() * producto.getPrecio().intValue();
+        }
+        this.total = totalCosto;
+    }
 }

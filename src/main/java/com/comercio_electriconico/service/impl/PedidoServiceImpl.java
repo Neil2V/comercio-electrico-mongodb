@@ -7,14 +7,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 
+import java.time.LocalDate;
+
 @Service
 public class PedidoServiceImpl implements PedidoService {
 
     @Autowired
     private PedidoDao pedidoDao;
 
-     @Override
+    @Override
     public Mono<Void> registrarPedido(Pedido pedido) {
+        pedido.setFchRegistro(LocalDate.now());
+        pedido.calcularTotal();
+
         if (pedido.getId() == null) {
             return pedidoDao.save(pedido).then();
         } else {
