@@ -1,5 +1,7 @@
 package com.comercio_electriconico.entity;
 
+import com.comercio_electriconico.model.Cliente;
+import com.comercio_electriconico.model.ProductoPedido;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,7 +19,7 @@ public class Pedido {
     @Id
     private String id;
     private String estado;
-    private Integer idCliente;
+    private Cliente cliente;
     private List<ProductoPedido> productos;
     private Integer total;
     private LocalDate fchRegistro;
