@@ -44,4 +44,16 @@ public class PedidoServiceImpl implements PedidoService {
         return pedidoDao.findById(id)
                 .flatMap(e -> pedidoDao.deleteById(id).then(Mono.just(e)));
     }
+
+    @Override
+    public Mono<Pedido> actualizarPedido(Pedido pedido) {
+        return pedidoDao.findById(pedido.getId())
+                .flatMap(e -> {
+                    e.setEstado(pedido.getEstado());
+                    e.setCliente(pedido.getCliente());
+                    e.setProductos(pedido.getProductos());
+                    e.setTotal(pedido.getTotal());
+                    return pedidoDao.save(e);
+                });
+    }
 }

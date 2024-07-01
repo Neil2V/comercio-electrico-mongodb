@@ -12,4 +12,7 @@ public interface PedidoService {
 
     Mono<Pedido> eliminarPedido(String id);
 
+    Mono<Pedido> actualizarPedido(Pedido pedido);
+
+
 }

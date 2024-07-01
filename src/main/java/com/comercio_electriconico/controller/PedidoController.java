@@ -33,4 +33,9 @@ public class PedidoController {
                 .map(e -> new ResponseEntity<>(e, HttpStatus.OK))
                 .switchIfEmpty(Mono.just(new ResponseEntity<>(HttpStatus.NOT_FOUND)));
     }
+
+    @PutMapping(path = "/actualizar")
+    public ResponseEntity<Mono<Pedido>> actualizar(@RequestBody Pedido pedido){
+        return new ResponseEntity<>(pedidoService.actualizarPedido(pedido), HttpStatus.OK);
+    }
 }
